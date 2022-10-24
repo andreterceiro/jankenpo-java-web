@@ -1,2 +1,62 @@
-The game
-<hr />
+<html>
+    <head>
+        <title>Jankenpo</title>
+        <meta charset="utf-8" />
+        <style>
+            .option {
+                padding:10px;
+                margin: 10px;
+                float:left;
+            }
+            .image-option {
+                border: 1px solid #000;
+            }
+        </style>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>      
+        <script>
+            $(document).ready(
+                function() {
+                    $(".image-option").click(
+                        function(event) {
+                            window.location.href = "index.jsp?option=" + extractOption(event.target.className);
+                            $.get(
+                                'index.jsp',
+                                {
+                                    'option': extractOption(event.target.className)
+                                }
+                            );
+                        }
+                    )
+                }
+            );
+
+            function extractOption(option) {
+                return option.replace("option-", "").replace(" option", "").replace("image-option", "");
+            }
+        </script>
+    </head>
+    <body>
+        <form method="post" id="form">
+            <div class="title">
+                Please select one option:
+            </div>
+            <hr />
+            <span class="option-paper option" id="option-paper">
+                <div class="title">Paper</div>
+                <img class="option-paper image-option" src="assets/paper.png" />
+            </span>
+            <span class="option-rock option" id="option-rock">
+                <div class="title">Rock</div>
+                <img class="option-rock image-option" src="assets/rock.png" />
+            </span>
+            <span class="option-scissors option" id="option-scissors">
+                <div class="title">Scissors</div>
+                <img class="option-scissors image-option" src="assets/scissors.png" />
+            </span>
+
+        </form>
+    </body>
+</html>
